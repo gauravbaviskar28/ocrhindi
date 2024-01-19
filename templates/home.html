@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        height: 100vh;
+        width: 100%;
+        font-family: "Poppins", sans-serif !important;
+      }
+      #container {
+        /* margin-top: 50px ;
+      margin: 0px auto; */
+        width: auto;
+        height: auto;
+        /* border: 10px #333 solid;  */
+      }
+
+      #videoElement {
+        width: 500px;
+        height: 375px;
+      }
+
+      .no-padding {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      #f_style {
+        width: 100%;
+        height: 70%;
+        margin-left: 10px;
+      }
+      * {
+        outline: none;
+      }
+
+      strong {
+        font-weight: 600;
+      }
+
+      .page {
+        width: auto;
+        height: auto;
+        background: #fdfdfd;
+        font-family: "Encode Sans Condensed", sans-serif;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        color: #212121;
+      }
+
+      header {
+        display: flex;
+        position: fixed;
+        width: 100%;
+        height: 70px;
+        background: #212121;
+        color: #fff;
+        justify-content: center;
+        align-items: center;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        font-family: inherit;
+      }
+
+      main {
+        padding: 70px 20px 0;
+        display: -webkit-inline-flex;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      main > div {
+        margin: top;
+        max-width: auto;
+        justify-content: center;
+      }
+
+      main h2 span {
+        color: #bf7497;
+      }
+
+      main p {
+        line-height: 1.5;
+        font-weight: 200;
+        margin: 20px 0; 
+      }
+
+      main small {
+        font-weight: 300;
+        color: #888;
+      }
+
+      #nav-container {
+        position: fixed;
+        height: 100vh;
+        width: 100%;
+        pointer-events: none;
+      }
+
+      #nav-container .bg {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        height: calc(100% - 70px);
+        visibility: hidden;
+        opacity: 0;
+        transition: 0.3s;
+        background: #000;
+      }
+
+      #nav-container:focus-within .bg {
+        visibility: visible;
+        opacity: 0.6;
+      }
+
+      #nav-container * {
+        visibility: visible;
+      }
+
+      .button {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        z-index: 1;
+        -webkit-appearance: none;
+        border: 0;
+        background: transparent;
+        border-radius: 0;
+        height: 70px;
+        width: 30px;
+        cursor: pointer;
+        pointer-events: auto;
+        margin-left: 25px;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+
+      .icon-bar {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background: #aaa;
+        transition: 0.3s;
+      }
+
+      .icon-bar + .icon-bar {
+        margin-top: 5px;
+      }
+
+      #nav-container:focus-within .button {
+        pointer-events: none;
+      }
+
+      #nav-container:focus-within .icon-bar:nth-of-type(1) {
+        transform: translate3d(0, 8px, 0) rotate(45deg);
+      }
+
+      #nav-container:focus-within .icon-bar:nth-of-type(2) {
+        opacity: 0;
+      }
+
+      #nav-container:focus-within .icon-bar:nth-of-type(3) {
+        transform: translate3d(0, -8px, 0) rotate(-45deg);
+      }
+
+      #nav-content {
+        margin-top: 70px;
+        padding: 20px;
+        width: 90%;
+        max-width: 300px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: calc(100% - 70px);
+        background: #ececec;
+        pointer-events: auto;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        transform: translateX(-100%);
+        transition: transform 0.3s;
+        will-change: transform;
+        contain: paint;
+      }
+
+      #nav-content ul {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      #nav-content li a {
+        padding: 10px 5px;
+        display: block;
+        text-transform: uppercase;
+        transition: color 0.1s;
+      }
+
+      #nav-content li a:hover {
+        color: #bf7497;
+      }
+
+      #nav-content li:not(.small) + .small {
+        margin-top: auto;
+      }
+
+      .small {
+        display: flex;
+        align-self: center;
+      }
+
+      .small a {
+        font-size: 12px;
+        font-weight: 400;
+        color: #888;
+      }
+
+      .small a + a {
+        margin-left: 15px;
+      }
+
+      #nav-container:focus-within #nav-content {
+        transform: none;
+      }
+      /* * {
+              box-sizing: border-box;
+              margin: 0;
+              padding: 0;
+          } */
+
+      a,
+      a:visited,
+      a:focus,
+      a:active,
+      a:link {
+        text-decoration: none;
+        outline: 0;
+      }
+
+      a {
+        color: currentColor;
+        transition: 0.2s ease-in-out;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        margin: auto;
+      }
+
+      ul {
+        padding: 0;
+        list-style: none;
+      }
+
+      img {
+        vertical-align: middle;
+        height: auto;
+        width: 100%;
+      }
+      .Neon {
+        font-family: sans-serif;
+        font-size: 14px;
+        color: #494949;
+        position: relative;
+      }
+      .Neon * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        justify-content: center;
+      }
+
+      .Neon-input-dragDrop {
+        display: block;
+        width: 343px;
+        margin: 0 auto 25px auto;
+        padding: 25px;
+        color: #8d9499;
+        color: #97a1a8;
+        background: #fff;
+        border: 2px dashed #c8cbce;
+        text-align: center;
+        justify-content: center;
+        -webkit-transition: box-shadow 0.3s, border-color 0.3s;
+        -moz-transition: box-shadow 0.3s, border-color 0.3s;
+        transition: box-shadow 0.3s, border-color 0.3s;
+      }
+
+      .Neon-input-dragDrop .Neon-input-icon {
+        font-size: 48px;
+        margin-top: -10px;
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+      }
+
+      .Neon-input-text h3 {
+        margin: 0;
+        font-size: 18px;
+      }
+
+      .Neon-input-text span {
+        font-size: 12px;
+      }
+
+      .Neon-input-choose-btn.blue {
+        color: #008bff;
+        border: 1px solid #008bff;
+      }
+
+      .Neon-input-choose-btn {
+        display: inline-block;
+        padding: 8px 14px;
+        outline: none;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+        white-space: nowrap;
+        font-size: 12px;
+        font-weight: bold;
+        color: #8d9496;
+        border-radius: 3px;
+        border: 1px solid #c6c6c6;
+        vertical-align: middle;
+        background-color: #fff;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.05);
+        -webkit-transition: all 0.2s;
+        -moz-transition: all 0.2s;
+        transition: all 0.2s;
+      }
+
+      .main__container {
+        height: 100vh;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .upload_container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        gap: 1rem;
+      }
+      .upload_content {
+        padding: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2.5rem;
+
+        border: 0.25rem dashed grey;
+      }
+      .upload_content h1 {
+        font-weight: 600;
+      }
+      .upload_message {
+        padding: 0.5rem;
+
+        display: flex;
+        align-items: center;
+        color: #198754;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page">
+      <header tabindex="0">OCR on Hindi Handwritten Text</header>
+      <div id="nav-container">
+        <div class="bg"></div>
+        <div class="button" tabindex="0">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </div>
+        <div id="nav-content" tabindex="0">
+          <ul>
+            <li><a href="#0">Home</a></li>
+            <li><a href="#0">Know more About OCR</a></li>
+            <li><a href="https://drive.google.com/file/d/1-AUxtCkGpUpcuiSYF8A44pRPy_WlCO3r/view?usp=sharing">User Manual</a></li>
+            <li><a href="#0">Demo Video</a></li>
+            
+            <!-- <li class="small">
+              <a href="#0">Facebook</a><a href="#0">Instagram</a>
+            </li> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="main__container">
+      <!-- file upload -->
+      <div>
+        <form
+          action="{% url 'home'%}"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %} {{ form.img }}
+
+          <div class="upload_container">
+            <div class="upload_content">
+              <h1>Drag and Drop files here !</h1>
+              <h2>or</h2>
+              <button class="btn btn-success">
+                <i class="fas fa-folder" style="margin-right: 1rem"></i>Browse
+                Files
+              </button>
+            </div>
+            <!-- <div class="upload_message">
+              <h6>
+                <i class="fas fa-check"></i>
+                Image Uploaded Successfully
+              </h6>
+            </div> -->
+            <button class="btn btn-primary" style="width: 50%">Convert</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

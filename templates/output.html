@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container mx-auto my-auto" style="margin-top: 5%;">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <!--img-->
+                <h2>Uploaded Image : </h2>
+                <img src="{{ img }}" class="img-fluid img-thumbnail" alt="">
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <!--desc-->
+                <h2>Output : </h2>
+                <textarea name="" id="text" cols="70" rows="25">{{ desc }}</textarea>
+                <button class="btn btn-lg btn-success" id="btn2"> Download as PDF </button>
+                <input type="button" class="btn btn-lg btn-danger" id="btn" value="Download as Text"/> 
+                <a href="{% url 'gentemplate'%}" class="btn btn-lg btn-info"> Generate Template </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Download as text -->
+    <script>
+        function download(file, text) {
+          
+            //creating an invisible element
+            var element = document.createElement('a');
+            element.setAttribute('href', 
+            'data:text/plain;charset=utf-8, '
+            + encodeURIComponent(text));
+            element.setAttribute('download', file);
+          
+            // Above code is equivalent to
+            // <a href="path of file" download="file name">
+          
+            document.body.appendChild(element);
+          
+            //onClick property
+            element.click();
+          
+            document.body.removeChild(element);
+        }
+          
+        // Start file download.
+        document.getElementById("btn")
+        .addEventListener("click", function() {
+            // Generate download of hello.txt 
+            // file with some content
+            var text = document.getElementById("text").value;
+            var filename = "output.txt";
+          
+            download(filename, text);
+        }, false);
+     </script>
+
+     <!-- Download as PDF -->
+    <script>
+        var button = document.getElementById("btn2");
+        var makepdf = document.getElementById("text");
+    
+        button.addEventListener("click", function () {
+            var mywindow = window.open("", "PRINT", 
+                    "height=800,width=1000");
+    
+            mywindow.document.write(makepdf.value);
+    
+            mywindow.document.close();
+            mywindow.focus();
+    
+            mywindow.print();
+            mywindow.close();
+    
+            return true;
+        });
+    </script>
+</body>
+</html>
