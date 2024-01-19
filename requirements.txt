@@ -1,5 +1,5 @@
 pip==23.3.2
-python
+Python==3.10.10
 asgiref==3.4.1
 backcall==0.2.0
 colorama==0.4.4
