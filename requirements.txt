@@ -18,7 +18,7 @@ opencv-python-headless==4.5.4.60
 packaging==21.3
 parso==0.8.3
 pickleshare==0.7.5
-Pillow==8.4.0
+Pillow==8.3.2
 prompt-toolkit==3.0.23
 Pygments==2.10.0
 pyparsing==3.0.6
